@@ -20,9 +20,12 @@ compileJava.options.encoding = 'US-ASCII'
 repositories {
     mavenLocal()
     maven {
-        url "http://jars.interlis.ch"
+        url "https://jars.interlis.ch"
     }
     mavenCentral()
+    	flatDir {
+		dirs 'libs'
+	}
 }
 
 Properties properties = new Properties()
@@ -288,9 +291,11 @@ configurations {
     ftpAntTask
 }
 dependencies {
-    implementation group: 'ch.interlis', name: 'iox-ili', version: '1.21.0+'
-    implementation group: 'ch.interlis', name: 'ili2c-tool', version: "5.1.0+"
-    implementation group: 'ch.interlis', name: 'ili2c-core', version: "5.1.0+"
+    compile group: 'com.vividsolutions', name: 'jts-core', version: '1.14.0'
+    implementation name: "iox-ili-1.21.1-SNAPSHOT"
+    //implementation group: 'ch.interlis', name: 'iox-ili', version: '1.21.0+'
+    implementation group: 'ch.interlis', name: 'ili2c-tool', version: "5.1.0+", {exclude group: 'ch.interlis', module: 'iox-ili'} 
+    implementation group: 'ch.interlis', name: 'ili2c-core', version: "5.1.0+", {exclude group: 'ch.interlis', module: 'iox-ili'} 
     implementation group: 'ch.ehi', name: 'ehisqlgen', version: "1.13.8"
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.9.7'
 	implementation group: 'net.iharder', name: 'base64', version: '2.3.9'
